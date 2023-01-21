@@ -2,12 +2,12 @@
 
 ### :pencil: Description:
 
-This is a LUA port of tpopes famous [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. `unimpaired.nvim` aims to replicate the exact behaviour of `vim-unimpaired`, with some exceptions (see [disclaimer](#disclaimer)).
+This is a LUA port of tpopes famous [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. `unimpaired.nvim` aims to replicate the exact behaviour of `vim-unimpaired`, with some exceptions (see [disclaimer](#:warning:-disclaimer)).
 
 `unimpaired.nvim` is a collection of useful keymaps which follow a pattern: They
 come in complementary pairs which mostly fall into four categories:
 
-- There are mappings which are simply short normal mode aliases for commonly used ex commands. `]q` is `:cnext`. `[q` is `:cprevious`. `]a` is `:next`. `[b` is `:bprevious`. See the [default configuration](#configuration) for the full set of 20 mappings
+- There are mappings which are simply short normal mode aliases for commonly used ex commands. `]q` is `:cnext`. `[q` is `:cprevious`. `]a` is `:next`. `[b` is `:bprevious`. See the [default configuration](#:gear:-configuration) for the full set of 20 mappings
 - There are linewise mappings. `[<Space>` and `]<Space>` add newlines before and after the cursor line. `[e` and `]e` exchange the current line with the one above or below it.
 - There are mappings for toggling options. `[os`, `]os`, and `yos` perform `:set spell`, `:set nospell`, and `:set invspell`, respectively. There's also `l` (list), `n` (number), `w` (wrap), `x` (cursorline cursorcolumn), and several others
 - And in the miscellaneous category, there's `[f` and `]f` to go to the next/previous file in the directory, and `[n` and `]n` to jump between SCM conflict markers (the latter is not implemented yet)
@@ -465,7 +465,7 @@ To see all keys of `keymaps`, have a look at the default setup function of `unim
 
 </details>
 
-### ⚠️  Disclaimer: 
+### ⚠️  Disclaimer:
 
 This plugin is work in progress. You may experience bugs and changed of the API.
 

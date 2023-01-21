@@ -63,6 +63,16 @@ local defaults = {
             description = 'Jump to last entry in loclist',
             dot_repeat = false,
         },
+        lpfile = {
+            mapping = '[<C-l>',
+            description = 'Jump to last entry of [count] previous file in loclist',
+            dot_repeat = true,
+        },
+        lnfile = {
+            mapping = ']<C-l>',
+            description = 'Jump to first entry of [count] next file in loclist',
+            dot_repeat = true,
+        },
         cprevious = {
             mapping = '[q',
             description = 'Jump to [count] previous entry in qflist',
@@ -83,6 +93,16 @@ local defaults = {
             description = 'Jump to last entry in qflist',
             dot_repeat = false,
         },
+        cpfile = {
+            mapping = '[<C-q>',
+            description = 'Jump to last entry of [count] previous file in qflist',
+            dot_repeat = true,
+        },
+        cnfile = {
+            mapping = ']<C-q>',
+            description = 'Jump to first entry of [count] next file in qflist',
+            dot_repeat = true,
+        },
         tprevious = {
             mapping = '[t',
             description = 'Jump to [count] previous matching tag',
@@ -102,6 +122,26 @@ local defaults = {
             mapping = ']T',
             description = 'Jump to last matching tag',
             dot_repeat = false,
+        },
+        ptprevious = {
+            mapping = '[<C-t>',
+            description = ':tprevious in the preview window',
+            dot_repeat = true,
+        },
+        ptnext = {
+            mapping = ']<C-t>',
+            description = ':tnext in the preview window',
+            dot_repeat = true,
+        },
+        previous_file = {
+            mapping = '[f',
+            description = 'Previous file in directory. :colder in qflist',
+            dot_repeat = true,
+        },
+        next_file = {
+            mapping = ']f',
+            description = 'Next file in directory. :cnewer in qflist',
+            dot_repeat = true,
         },
         blank_above = {
             mapping = '[<Space>',
@@ -331,7 +371,7 @@ local defaults = {
     }
 }
 
-M.setup = function(user_conf)
+M.init = function(user_conf)
     user_conf = user_conf or {}
     if user_conf.default_keymaps == false then
         defaults = {}

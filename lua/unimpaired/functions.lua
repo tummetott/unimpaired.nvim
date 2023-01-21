@@ -1,12 +1,10 @@
 local M = {}
 
--- Custom keymaps can be dot repeated, when they are executed through the
--- operatorfunc. Whenever there is a normal mode command inside the custom
--- keymap, the dot would repeat the last normal mode command and not the whole
--- custom keymap. This function sets the operatorfunc as last executed command
--- (without executing the callback) and therefore preserves the dot repetition of
--- the whole keymap
-local preserveDotRepeat = function(count)
+-- Dot repetition of a custom mapping breaks as soon as there is a dot repeatable normal
+-- mode command inside the mapping. This function restores the dot repetition of
+-- the mapping while preserving the [count] when called as last statement inside
+-- the custom mapping
+local restore_dot_repetition = function(count)
     count = count or ''
     local callback = vim.go.operatorfunc
     vim.go.operatorfunc = ''
@@ -64,6 +62,14 @@ M.llast = function()
     vim.cmd('llast')
 end
 
+M.lpfile = function()
+    vim.cmd('silent! ' .. vim.v.count1 .. 'lpfile')
+end
+
+M.lnfile = function()
+    vim.cmd('silent! ' .. vim.v.count1 .. 'lnfile')
+end
+
 M.cprevious = function()
     vim.cmd('silent! ' .. vim.v.count1 .. 'cprevious')
     vim.cmd.normal('zv')
@@ -82,6 +88,14 @@ M.clast = function()
     vim.cmd('clast')
 end
 
+M.cpfile = function()
+    vim.cmd('silent! ' .. vim.v.count1 .. 'cpfile')
+end
+
+M.cnfile = function()
+    vim.cmd('silent! ' .. vim.v.count1 .. 'cnfile')
+end
+
 M.tprevious = function()
     vim.cmd('silent! ' .. vim.v.count1 .. 'tprevious')
 end
@@ -98,6 +112,75 @@ M.tlast = function()
     vim.cmd('tlast')
 end
 
+M.ptprevious = function()
+    vim.cmd('silent! ' .. vim.v.count1 .. 'ptprevious')
+end
+
+M.ptnext = function()
+    vim.cmd('silent! ' .. vim.v.count1 .. 'ptnext')
+end
+
+local get_current_wininfo = function()
+    return vim.fn.getwininfo(vim.fn.win_getid())[1]
+end
+
+local get_files = function(dir)
+    local entries = vim.fn.split(vim.fn.glob(dir .. '/*' ), '\n')
+    local files = {}
+    for _, entry in pairs(entries) do
+        if vim.fn.isdirectory(entry) ~= 1 then
+            table.insert(files, vim.fn.fnamemodify(entry, ':t'))
+        end
+    end
+    if vim.tbl_isempty(files) then return else return files end
+end
+
+local file_by_offset = function(offset)
+    local dir = vim.fn.expand('%:p:h')
+    local files = get_files(dir)
+    if not files then return end
+    local current = vim.fn.expand('%:t')
+    if current == '' then
+        if offset < 0 then return dir .. '/' .. files[1]
+        else return dir .. '/' .. files[#files] end
+    else
+        local index = vim.fn.index(files, current) + 1
+        if index == 0 then return end
+        index = index + offset
+        if index < 1 then index = 1
+        elseif index > #files then index = #files end
+        return dir .. '/' .. files[index]
+    end
+end
+
+M.previous_file = function()
+    local wininfo = get_current_wininfo()
+    if wininfo.loclist == 1 then
+        vim.cmd('silent! lolder ' .. vim.v.count1 )
+    elseif wininfo.quickfix == 1 then
+        vim.cmd('silent! colder ' .. vim.v.count1 )
+    else
+        local file = file_by_offset(-vim.v.count1)
+        if file then
+            vim.cmd('edit ' .. file)
+        end
+    end
+end
+
+M.next_file = function()
+    local wininfo = get_current_wininfo()
+    if wininfo.loclist == 1 then
+        vim.cmd('silent! lnewer ' .. vim.v.count1 )
+    elseif wininfo.quickfix == 1 then
+        vim.cmd('silent! cnewer ' .. vim.v.count1 )
+    else
+        local file = file_by_offset(vim.v.count1)
+        if file then
+            vim.cmd('edit ' .. file)
+        end
+    end
+end
+
 M.blank_above = function()
     vim.cmd("put! =repeat(nr2char(10), v:count1)|silent ']+")
 end
@@ -110,28 +193,28 @@ M.exchange_above = function()
     local count = vim.v.count1
     vim.cmd('silent! move --' .. count)
     vim.cmd.normal('==')
-    preserveDotRepeat(count)
+    restore_dot_repetition(count)
 end
 
 M.exchange_below = function()
     local count = vim.v.count1
     vim.cmd('silent! move +' .. count)
     vim.cmd.normal('==')
-    preserveDotRepeat(count)
+    restore_dot_repetition(count)
 end
 
 M.exchange_section_above = function()
     local count = vim.v.count1
     vim.cmd("silent! '<,'>move '<--" .. count)
     vim.cmd.normal('gv=')
-    preserveDotRepeat(count)
+    restore_dot_repetition(count)
 end
 
 M.exchange_section_below = function()
     local count = vim.v.count1
     vim.cmd("silent! '<,'>move '>+" .. count)
     vim.cmd.normal('gv=')
-    preserveDotRepeat(count)
+    restore_dot_repetition(count)
 end
 
 M.enable_background = function()
@@ -323,5 +406,40 @@ M.toggle_cursorcross = function()
         M.enable_cursorcross()
     end
 end
+
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
+local state = {
+    paste = nil,
+    mouse = nil,
+}
+
+local setup_paste = function()
+    state.paste = vim.o.paste
+    state.mouse = vim.o.mouse
+    vim.o.paste = true
+    vim.o.mouse = ''
+    local group = augroup('unimpaired_restore_paste', { clear = true })
+    autocmd('InsertLeave', {
+        callback = function()
+            vim.o.paste = state.paste
+            vim.o.mouse = state.mouse
+            vim.cmd('autocmd! unimpaired_restore_paste')
+        end,
+        group = group
+    })
+end
+
+M.paste_above = function()
+    setup_paste()
+    return 'O'
+end
+
+M.paste_below = function()
+    setup_paste()
+    return 'o'
+end
+
 
 return M

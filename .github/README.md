@@ -54,9 +54,8 @@ use {
 
 Unimpaired comes with the followind defaults:
 
-<details>
-  <summary>Click me</summary>
-    ```lua
+<details><summary>Click me</summary>
+```lua
     {
         default_keymaps = true,
         keymaps = {
@@ -427,5 +426,6 @@ Unimpaired comes with the followind defaults:
             },
         }
     }
-    ```
+```
+
 </details>

@@ -2,7 +2,7 @@
 
 ### :pencil: Description:
 
-This is a LUA port of tpopes famous [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. `unimpaired.nvim` aims to replicate the exact behaviour with some exceptions (see [disclaimer](#disclaimer)).
+This is a LUA port of tpopes famous [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. `unimpaired.nvim` aims to replicate the exact behaviour of `vim-unimpaired`, with some exceptions (see [disclaimer](#disclaimer)).
 
 `unimpaired.nvim` is a collection of useful keymaps which follow a pattern: They
 come in complementary pairs which mostly fall into four categories:

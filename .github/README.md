@@ -57,37 +57,35 @@ Customizing keymaps works as following:
 ```lua
 require('unimpaired').setup {
     keymaps = {
-        -- If you want to overwrite the mapping, keymap description and
-        -- dot-repetition for e.g. going to the next buffer
+        -- To overwrite the mapping, keymap description and dot-repetition for
+        -- ':bnext', write
         bnext = {
             mapping = '<leader>n',
             description = 'Go to [count] next buffer',
             dot_repeat = true,
         }
 
-        -- If you don't like the command 'bprevious' to be dot repeatable, you
-        -- can disable it
+        -- To disable dot repetition for ':bprevious', write
         bprevious = {
             mapping = '<leader>p',
             description = 'Go to [count] previous buffer',
             dot_repeat = false,
 
-        -- If you just want to change the keymap and don't care about desciption
-        -- and dot-repetition, you can also just write
+        -- If you just want to change the keymap for ':bfirst' and don't care
+        -- about desciption and dot-repetition, write the shorthand
         bfirst = '<leader>N'
 
-        -- If you want to disable a keymap completely, set it to false
+        -- To disable the kemap ':blast' completely, set it to false
         blast = false
     }
 
-    -- If you don't want have any default keymaps you can disable them and
-    -- define your own mappings afterwards
+    -- Disable the default mappings if you prefer to define your own mappings
     default_keymaps = false
 }
 ```
 
 ##### Default Configuration
-To see all keys of `keymaps`, have a look at the default setup function of `unimpaired.nvim`:
+To see all keys of the `keymaps` table, have a look at the default setup function of `unimpaired.nvim`:
 
 <details><summary>Click me</summary>
 

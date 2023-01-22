@@ -86,7 +86,7 @@ require('unimpaired').setup {
 ```
 
 ##### Default Configuration
-To see all keys of the `keymaps` table, have a look at the default setup function of `unimpaired.nvim`:
+To see all keys of the `keymaps` table, have a look at the default setup options of `unimpaired.nvim`:
 
 <details><summary>Click me</summary>
 

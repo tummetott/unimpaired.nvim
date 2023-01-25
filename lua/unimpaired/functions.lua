@@ -234,15 +234,18 @@ M.enable_cursorline = function() vim.o.cursorline = true end
 
 M.disable_cursorline = function() vim.o.cursorline = false end
 
-M.toggle_cursorline = function()
+local get_cursorline_value = function()
     -- The plugin reticle.nvim has an option to always show the cursorline
     -- number, even when the cursorline itself is not enabled. This requires the
     -- cursorline setting to remain switched on. Therefore we can't get the
-    -- cursorline state from the option itself, we load it from the plugin
+    -- cursorline state from the option itself but we can get in from the
+    -- plugin. Lets' create a wrapper function around getting this option
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then vim.o.cursorline = not reticle.enabled.cursorline
-    else vim.o.cursorline = not vim.o.cursorline end
+    if loaded then return reticle.enabled.cursorline
+    else return vim.o.cursorline end
 end
+
+M.toggle_cursorline = function() vim.o.cursorline = not get_cursorline_value() end
 
 M.enable_diff = function() vim.cmd('diffthis') end
 
@@ -330,8 +333,11 @@ M.disable_cursorcross = function()
 end
 
 M.toggle_cursorcross = function()
-    if vim.o.cursorcolumn then M.disable_cursorcross()
-    else M.enable_cursorcross() end
+    if get_cursorline_value() and vim.o.cursorcolumn then
+        M.disable_cursorcross()
+    else
+        M.enable_cursorcross()
+    end
 end
 
 local autocmd = vim.api.nvim_create_autocmd

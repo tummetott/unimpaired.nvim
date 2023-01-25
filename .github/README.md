@@ -36,7 +36,7 @@ Example using [packer](https://github.com/wbthomason/packer.nvim):
 
 ```lua
 use {
-    'Tummetott/unimpaired.nvim',
+    'tummetott/unimpaired.nvim',
     config = function()
         require('unimpaired').setup {
             -- add any options here or leave empty

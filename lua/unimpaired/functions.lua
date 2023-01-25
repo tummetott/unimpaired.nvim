@@ -125,7 +125,7 @@ local get_current_wininfo = function()
 end
 
 local get_files = function(dir)
-    local entries = vim.fn.split(vim.fn.glob(dir .. '/*' ), '\n')
+    local entries = vim.fn.split(vim.fn.glob(dir .. '/*'), '\n')
     local files = {}
     for _, entry in pairs(entries) do
         if vim.fn.isdirectory(entry) ~= 1 then
@@ -156,9 +156,9 @@ end
 M.previous_file = function()
     local wininfo = get_current_wininfo()
     if wininfo.loclist == 1 then
-        vim.cmd('silent! lolder ' .. vim.v.count1 )
+        vim.cmd('silent! lolder ' .. vim.v.count1)
     elseif wininfo.quickfix == 1 then
-        vim.cmd('silent! colder ' .. vim.v.count1 )
+        vim.cmd('silent! colder ' .. vim.v.count1)
     else
         local file = file_by_offset(-vim.v.count1)
         if file then
@@ -170,7 +170,7 @@ end
 M.next_file = function()
     local wininfo = get_current_wininfo()
     if wininfo.loclist == 1 then
-        vim.cmd('silent! lnewer ' .. vim.v.count1 )
+        vim.cmd('silent! lnewer ' .. vim.v.count1)
     elseif wininfo.quickfix == 1 then
         vim.cmd('silent! cnewer ' .. vim.v.count1 )
     else
@@ -226,11 +226,8 @@ M.disable_background = function()
 end
 
 M.toggle_background = function()
-    if vim.o.background == 'dark' then
-        M.enable_background()
-    else
-        M.disable_background()
-    end
+    if vim.o.background == 'dark' then M.enable_background()
+    else M.disable_background() end
 end
 
 M.enable_cursorline = function() vim.o.cursorline = true end
@@ -238,156 +235,89 @@ M.enable_cursorline = function() vim.o.cursorline = true end
 M.disable_cursorline = function() vim.o.cursorline = false end
 
 M.toggle_cursorline = function()
-    if vim.o.cursorline then
-        M.disable_cursorline()
-    else
-        M.enable_cursorline()
-    end
+    -- The plugin reticle.nvim has an option to always show the cursorline
+    -- number, even when the cursorline itself is not enabled. This requires the
+    -- cursorline setting to remain switched on. Therefore we can't get the
+    -- cursorline state from the option itself, we load it from the plugin
+    local loaded, reticle = pcall(require, 'reticle')
+    if loaded then vim.o.cursorline = not reticle.enabled.cursorline
+    else vim.o.cursorline = not vim.o.cursorline end
 end
 
-M.enable_diff = function()
-    vim.cmd('diffthis')
-end
+M.enable_diff = function() vim.cmd('diffthis') end
 
-M.disable_diff = function()
-    vim.cmd('diffoff')
-end
+M.disable_diff = function() vim.cmd('diffoff') end
 
 M.toggle_diff = function()
-    if vim.o.diff then
-        M.disable_diff()
-    else
-        M.enable_diff()
-    end
+    if vim.o.diff then M.disable_diff()
+    else M.enable_diff() end
 end
 
 M.enable_hlsearch = function() vim.o.hlsearch = true end
 
 M.disable_hlsearch = function() vim.o.hlsearch = false end
 
-M.toggle_hlsearch = function()
-    if vim.o.hlsearch then
-        M.disable_hlsearch()
-    else
-        M.enable_hlsearch()
-    end
-end
+M.toggle_hlsearch = function() vim.o.hlsearch = not vim.o.hlsearch end
 
 M.enable_ignorecase = function() vim.o.ignorecase = true end
 
 M.disable_ignorecase = function() vim.o.ignorecase = false end
 
-M.toggle_ignorecase = function()
-    if vim.o.ignorecase then
-        M.disable_ignorecase()
-    else
-        M.enable_ignorecase()
-    end
-end
+M.toggle_ignorecase = function() vim.o.ignorecase = not vim.o.ignorecase end
 
 M.enable_list = function() vim.o.list = true end
 
 M.disable_list = function() vim.o.list = false end
 
-M.toggle_list = function()
-    if vim.o.list then
-        M.disable_list()
-    else
-        M.enable_list()
-    end
-end
+M.toggle_list = function() vim.o.list = not vim.o.list end
 
 M.enable_number = function() vim.o.number = true end
 
 M.disable_number = function() vim.o.number = false end
 
-M.toggle_number = function()
-    if vim.o.number then
-        M.disable_number()
-    else
-        M.enable_number()
-    end
-end
+M.toggle_number = function() vim.o.number = not vim.o.number end
 
 M.enable_relativenumber = function() vim.o.relativenumber = true end
 
 M.disable_relativenumber = function() vim.o.relativenumber = false end
 
-M.toggle_relativenumber = function()
-    if vim.o.relativenumber then
-        M.disable_relativenumber()
-    else
-        M.enable_relativenumber()
-    end
-end
+M.toggle_relativenumber = function() vim.o.relativenumber = not vim.o.relativenumber end
 
 M.enable_spell = function() vim.o.spell = true end
 
 M.disable_spell = function() vim.o.spell = false end
 
-M.toggle_spell = function()
-    if vim.o.spell then
-        M.disable_spell()
-    else
-        M.enable_spell()
-    end
-end
+M.toggle_spell = function() vim.o.spell = not vim.o.spell end
 
-M.enable_colorcolumn = function()
-    vim.o.colorcolumn = '+1'
-end
+M.enable_colorcolumn = function() vim.o.colorcolumn = '+1' end
 
-M.disable_colorcolumn = function()
-    vim.o.colorcolumn = ''
-end
+M.disable_colorcolumn = function() vim.o.colorcolumn = '' end
 
 M.toggle_colorcolumn = function()
-    if vim.o.colorcolumn == '' then
-        M.enable_colorcolumn()
-    else
-        M.disable_colorcolumn()
-    end
+    if vim.o.colorcolumn == '' then M.enable_colorcolumn()
+    else M.disable_colorcolumn() end
 end
 
 M.enable_cursorcolumn = function() vim.o.cursorcolumn = true end
 
 M.disable_cursorcolumn = function() vim.o.cursorcolumn = false end
 
-M.toggle_cursorcolumn = function()
-    if vim.o.cursorcolumn then
-        M.disable_cursorcolumn()
-    else
-        M.enable_cursorcolumn()
-    end
-end
+M.toggle_cursorcolumn = function() vim.o.cursorcolumn = not vim.o.cursorcolumn end
 
-M.enable_virtualedit = function()
-    vim.o.virtualedit = 'all'
-end
+M.enable_virtualedit = function() vim.o.virtualedit = 'all' end
 
-M.disable_virtualedit = function()
-    vim.o.virtualedit = ''
-end
+M.disable_virtualedit = function() vim.o.virtualedit = '' end
 
 M.toggle_virtualedit = function()
-    if vim.o.virtualedit == '' then
-        M.enable_virtualedit()
-    else
-        M.disable_virtualedit()
-    end
+    if vim.o.virtualedit == '' then M.enable_virtualedit()
+    else M.disable_virtualedit() end
 end
 
 M.enable_wrap = function() vim.o.wrap = true end
 
 M.disable_wrap = function() vim.o.wrap = false end
 
-M.toggle_wrap = function()
-    if vim.o.wrap then
-        M.disable_wrap()
-    else
-        M.enable_wrap()
-    end
-end
+M.toggle_wrap = function() vim.o.wrap = not vim.o.wrap end
 
 M.enable_cursorcross = function()
     vim.o.cursorline = true
@@ -400,11 +330,8 @@ M.disable_cursorcross = function()
 end
 
 M.toggle_cursorcross = function()
-    if vim.o.cursorcolumn then
-        M.disable_cursorcross()
-    else
-        M.enable_cursorcross()
-    end
+    if vim.o.cursorcolumn then M.disable_cursorcross()
+    else M.enable_cursorcross() end
 end
 
 local autocmd = vim.api.nvim_create_autocmd

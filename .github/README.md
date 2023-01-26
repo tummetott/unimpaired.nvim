@@ -2,7 +2,7 @@
 
 ### :pencil: Description:
 
-This is a LUA port of tpopes famous [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. `unimpaired.nvim` aims to replicate the exact behaviour of `vim-unimpaired`, with some exceptions (see [disclaimer](#disclaimer)).
+This is a LUA port of tpopes famous [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. `unimpaired.nvim` aims to replicate the exact behaviour of `vim-unimpaired`, with some exceptions (see [caveats](#caveats)).
 
 `unimpaired.nvim` is a collection of useful keymaps which follow a pattern: They
 come in complementary pairs which mostly fall into four categories:
@@ -18,7 +18,7 @@ come in complementary pairs which mostly fall into four categories:
 - ❌ You can disable keymaps you don't need
 - 🔁 All mappings are dot repeatable without additional plugin
 - 📝 Mappings have proper keymap descriptions (used by e.g. [which-key](https://github.com/folke/which-key.nvim))
-- 🔢 Most mappings can be prefixed with [count] 
+- 🔢 Many mappings can be prefixed with [count] 
 - 👯 Default behaviour mimics the original [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin
 - 💨 Written in LUA instead of vim script 
 
@@ -465,9 +465,9 @@ To see all keys of the `keymaps` table, have a look at the default setup options
 
 </details>
 
-### Disclaimer:
+### Caveats:
 
-This plugin is work in progress. You may experience bugs and changed of the API.
+This plugin is work in progress. You may experience bugs and changes of the API.
 
 Functionalities which are not supported yet:
 

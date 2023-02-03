@@ -230,22 +230,27 @@ M.toggle_background = function()
     else M.disable_background() end
 end
 
-M.enable_cursorline = function() vim.o.cursorline = true end
-
-M.disable_cursorline = function() vim.o.cursorline = false end
-
-local get_cursorline_value = function()
-    -- The plugin reticle.nvim has an option to always show the cursorline
-    -- number, even when the cursorline itself is not enabled. This requires the
-    -- cursorline setting to remain switched on. Therefore we can't get the
-    -- cursorline state from the option itself but we can get in from the
-    -- plugin. Lets' create a wrapper function around getting this option
+-- The plugin reticle.nvim has an option to always show the cursorline
+-- number, even when the cursorline itself is not enabled. This requires the
+-- cursorline setting to remain switched on. If reticle is installed, we use
+-- it's utility functions to change the cursorline
+M.enable_cursorline = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then return reticle.enabled.cursorline
-    else return vim.o.cursorline end
+    if loaded then reticle.enable_cursorline()
+    else vim.o.cursorline = true end
 end
 
-M.toggle_cursorline = function() vim.o.cursorline = not get_cursorline_value() end
+M.disable_cursorline = function()
+    local loaded, reticle = pcall(require, 'reticle')
+    if loaded then reticle.disable_cursorline()
+    else vim.o.cursorline = false end
+end
+
+M.toggle_cursorline = function()
+    local loaded, reticle = pcall(require, 'reticle')
+    if loaded then reticle.toggle_cursorline()
+    else vim.o.cursorline = not vim.o.cursorline end
+end
 
 M.enable_diff = function() vim.cmd('diffthis') end
 
@@ -323,21 +328,21 @@ M.disable_wrap = function() vim.o.wrap = false end
 M.toggle_wrap = function() vim.o.wrap = not vim.o.wrap end
 
 M.enable_cursorcross = function()
-    vim.o.cursorline = true
-    vim.o.cursorcolumn = true
+    M.enable_cursorline()
+    M.enable_cursorcolumn()
 end
 
 M.disable_cursorcross = function()
-    vim.o.cursorline = false
-    vim.o.cursorcolumn = false
+    M.disable_cursorline()
+    M.disable_cursorcolumn()
 end
 
 M.toggle_cursorcross = function()
-    if get_cursorline_value() and vim.o.cursorcolumn then
-        M.disable_cursorcross()
-    else
-        M.enable_cursorcross()
-    end
+    local cursorline = vim.o.cursorline
+    local loaded, reticle = pcall(require, 'reticle')
+    if loaded then cursorline = reticle.is_cursorline() end
+    if cursorline and vim.o.cursorcolumn then M.disable_cursorcross()
+    else M.enable_cursorcross() end
 end
 
 local autocmd = vim.api.nvim_create_autocmd

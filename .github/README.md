@@ -18,9 +18,9 @@ come in complementary pairs which mostly fall into four categories:
 - ❌ You can disable keymaps you don't need
 - 🔁 All mappings are dot repeatable without additional plugin
 - 📝 Mappings have proper keymap descriptions (used by e.g. [which-key](https://github.com/folke/which-key.nvim))
-- 🔢 Many mappings can be prefixed with [count] 
+- 🔢 Many mappings can be prefixed with [count]
 - 👯 Default behaviour mimics the original [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin
-- 💨 Written in LUA instead of vim script 
+- 💨 Written in LUA instead of vim script
 
 
 ### ⚡️ Requirements
@@ -382,6 +382,21 @@ To see all keys of the `keymaps` table, have a look at the default setup options
         toggle_spell = {
             mapping = 'yos',
             description = 'Toggle spell check',
+            dot_repeat = true,
+        },
+        enable_background = {
+            mapping = '[ob',
+            description = 'Set background to light',
+            dot_repeat = false,
+        },
+        disable_background = {
+            mapping = ']ob',
+            description = 'Set background to dark',
+            dot_repeat = false,
+        },
+        toggle_background = {
+            mapping = 'yob',
+            description = 'Toggle background',
             dot_repeat = true,
         },
         enable_colorcolumn = {

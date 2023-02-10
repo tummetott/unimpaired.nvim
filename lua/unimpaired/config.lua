@@ -293,6 +293,21 @@ local defaults = {
             description = 'Toggle spell check',
             dot_repeat = true,
         },
+        enable_background = {
+            mapping = '[ob',
+            description = 'Set background to light',
+            dot_repeat = false,
+        },
+        disable_background = {
+            mapping = ']ob',
+            description = 'Set background to dark',
+            dot_repeat = false,
+        },
+        toggle_background = {
+            mapping = 'yob',
+            description = 'Toggle background',
+            dot_repeat = true,
+        },
         enable_colorcolumn = {
             mapping = '[ot',
             description = 'Enable colorcolumn',

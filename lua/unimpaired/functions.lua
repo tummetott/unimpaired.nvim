@@ -297,15 +297,6 @@ M.disable_spell = function() vim.o.spell = false end
 
 M.toggle_spell = function() vim.o.spell = not vim.o.spell end
 
-M.enable_background = function() vim.o.background = 'light' end
-
-M.disable_background = function() vim.o.background = 'dark' end
-
-M.toggle_background = function()
-  if vim.o.background == 'dark' then M.enable_background()
-    else M.disable_background() end
-end
-
 M.enable_colorcolumn = function() vim.o.colorcolumn = '+1' end
 
 M.disable_colorcolumn = function() vim.o.colorcolumn = '' end

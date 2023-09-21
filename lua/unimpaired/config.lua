@@ -6,12 +6,12 @@ local defaults = {
         previous = {
             mapping = '[a',
             description = 'Jump to [count] previous file in arglist',
-            dot_repeat = true
+            dot_repeat = false,
         },
         next = {
             mapping = ']a',
             description = 'Jump to [count] next file in arglist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         first = {
             mapping = '[A',
@@ -26,12 +26,12 @@ local defaults = {
         bprevious = {
             mapping = '[b',
             description = 'Jump to [count] previous buffer',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         bnext = {
             mapping = ']b',
             description = 'Jump to [count] next buffer',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         bfirst = {
             mapping = '[B',
@@ -46,12 +46,12 @@ local defaults = {
         lprevious = {
             mapping = '[l',
             description = 'Jump to [count] previous entry in loclist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         lnext = {
             mapping = ']l',
             description = 'Jump to [count] next entry in loclist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         lfirst = {
             mapping = '[L',
@@ -66,22 +66,22 @@ local defaults = {
         lpfile = {
             mapping = '[<C-l>',
             description = 'Jump to last entry of [count] previous file in loclist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         lnfile = {
             mapping = ']<C-l>',
             description = 'Jump to first entry of [count] next file in loclist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         cprevious = {
             mapping = '[q',
             description = 'Jump to [count] previous entry in qflist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         cnext = {
             mapping = ']q',
             description = 'Jump to [count] next entry in qflist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         cfirst = {
             mapping = '[Q',
@@ -96,22 +96,22 @@ local defaults = {
         cpfile = {
             mapping = '[<C-q>',
             description = 'Jump to last entry of [count] previous file in qflist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         cnfile = {
             mapping = ']<C-q>',
             description = 'Jump to first entry of [count] next file in qflist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         tprevious = {
             mapping = '[t',
             description = 'Jump to [count] previous matching tag',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         tnext = {
             mapping = ']t',
             description = 'Jump to [count] next matching tag',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         tfirst = {
             mapping = '[T',
@@ -126,22 +126,22 @@ local defaults = {
         ptprevious = {
             mapping = '[<C-t>',
             description = ':tprevious in the preview window',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         ptnext = {
             mapping = ']<C-t>',
             description = ':tnext in the preview window',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         previous_file = {
             mapping = '[f',
             description = 'Previous file in directory. :colder in qflist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         next_file = {
             mapping = ']f',
             description = 'Next file in directory. :cnewer in qflist',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         blank_above = {
             mapping = '[<Space>',
@@ -186,7 +186,7 @@ local defaults = {
         toggle_cursorline = {
             mapping = 'yoc',
             description = 'Toggle cursorline',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_diff = {
             mapping = '[od',
@@ -201,7 +201,7 @@ local defaults = {
         toggle_diff = {
             mapping = 'yod',
             description = 'Toggle diff',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_hlsearch = {
             mapping = '[oh',
@@ -216,7 +216,7 @@ local defaults = {
         toggle_hlsearch = {
             mapping = 'yoh',
             description = 'Toggle hlsearch',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_ignorecase = {
             mapping = '[oi',
@@ -231,7 +231,7 @@ local defaults = {
         toggle_ignorecase = {
             mapping = 'yoi',
             description = 'Toggle ignorecase',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_list = {
             mapping = '[ol',
@@ -246,7 +246,7 @@ local defaults = {
         toggle_list = {
             mapping = 'yol',
             description = 'Toggle invisible characters (listchars)',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_number = {
             mapping = '[on',
@@ -261,7 +261,7 @@ local defaults = {
         toggle_number = {
             mapping = 'yon',
             description = 'Toggle line numbers',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_relativenumber = {
             mapping = '[or',
@@ -276,7 +276,7 @@ local defaults = {
         toggle_relativenumber = {
             mapping = 'yor',
             description = 'Toggle relative numbers',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_spell = {
             mapping = '[os',
@@ -291,7 +291,7 @@ local defaults = {
         toggle_spell = {
             mapping = 'yos',
             description = 'Toggle spell check',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_background = {
             mapping = '[ob',
@@ -306,7 +306,7 @@ local defaults = {
         toggle_background = {
             mapping = 'yob',
             description = 'Toggle background',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_colorcolumn = {
             mapping = '[ot',
@@ -321,7 +321,7 @@ local defaults = {
         toggle_colorcolumn = {
             mapping = 'yot',
             description = 'Toggle colorcolumn',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_cursorcolumn = {
             mapping = '[ou',
@@ -336,7 +336,7 @@ local defaults = {
         toggle_cursorcolumn = {
             mapping = 'you',
             description = 'Toggle cursorcolumn',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_virtualedit = {
             mapping = '[ov',
@@ -351,7 +351,7 @@ local defaults = {
         toggle_virtualedit = {
             mapping = 'yov',
             description = 'Toggle virtualedit',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_wrap = {
             mapping = '[ow',
@@ -366,7 +366,7 @@ local defaults = {
         toggle_wrap = {
             mapping = 'yow',
             description = 'Toggle line wrapping',
-            dot_repeat = true,
+            dot_repeat = false,
         },
         enable_cursorcross = {
             mapping = '[ox',
@@ -381,9 +381,9 @@ local defaults = {
         toggle_cursorcross = {
             mapping = 'yox',
             description = 'Toggle cursorcross',
-            dot_repeat = true,
+            dot_repeat = false,
         },
-    }
+    },
 }
 
 M.init = function(user_conf)

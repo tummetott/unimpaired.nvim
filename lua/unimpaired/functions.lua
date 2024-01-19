@@ -155,9 +155,11 @@ end
 
 M.previous_file = function()
     local wininfo = get_current_wininfo()
+    local ft = vim.bo.filetype
+    -- TODO: what about trouble loclists?
     if wininfo.loclist == 1 then
         vim.cmd('silent! lolder ' .. vim.v.count1)
-    elseif wininfo.quickfix == 1 then
+    elseif wininfo.quickfix == 1 or ft == 'Trouble' then
         vim.cmd('silent! colder ' .. vim.v.count1)
     else
         local file = file_by_offset(-vim.v.count1)
@@ -169,9 +171,11 @@ end
 
 M.next_file = function()
     local wininfo = get_current_wininfo()
+    local ft = vim.bo.filetype
+    -- TODO: what about trouble loclists?
     if wininfo.loclist == 1 then
         vim.cmd('silent! lnewer ' .. vim.v.count1)
-    elseif wininfo.quickfix == 1 then
+    elseif wininfo.quickfix == 1 or ft == 'Trouble' then
         vim.cmd('silent! cnewer ' .. vim.v.count1 )
     else
         local file = file_by_offset(vim.v.count1)
@@ -232,13 +236,13 @@ end
 
 M.enable_cursorline = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.enable_cursorline()
+    if loaded then reticle.set_cursorline(true)
     else vim.o.cursorline = true end
 end
 
 M.disable_cursorline = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.disable_cursorline()
+    if loaded then reticle.set_cursorline(false)
     else vim.o.cursorline = false end
 end
 
@@ -304,13 +308,13 @@ end
 
 M.enable_cursorcolumn = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.enable_cursorcolumn()
+    if loaded then reticle.set_cursorcolumn(true)
     else vim.o.cursorcolumn = true end
 end
 
 M.disable_cursorcolumn = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.disable_cursorcolumn()
+    if loaded then reticle.set_cursorcolumn(false)
     else vim.o.cursorcolumn = false end
 end
 
@@ -338,7 +342,7 @@ M.toggle_wrap = function() vim.o.wrap = not vim.o.wrap end
 M.enable_cursorcross = function()
     local loaded, reticle = pcall(require, 'reticle')
     if loaded then
-        reticle.enable_cursorcross()
+        reticle.set_cursorcross(true)
     else
         vim.o.cursorline = true
         vim.o.cursorcolumn = true
@@ -348,7 +352,7 @@ end
 M.disable_cursorcross = function()
     local loaded, reticle = pcall(require, 'reticle')
     if loaded then
-        reticle.disable_cursorcross()
+        reticle.set_cursorcross(false)
     else
         vim.o.cursorline = false
         vim.o.cursorcolumn = false

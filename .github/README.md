@@ -1,5 +1,9 @@
 # unimpaired.nvim
 
+[![Neovim][neovim-shield]][neovim-url]
+[![Lua][lua-shield]][lua-url]
+[![LuaRocks][luarocks-shield]][luarocks-url]
+
 ### :pencil: Description:
 
 This is a LUA port of tpopes famous [vim-unimpaired](https://github.com/tpope/vim-unimpaired) plugin. `unimpaired.nvim` aims to replicate the exact behaviour of `vim-unimpaired`, with some exceptions (see [caveats](#caveats)).
@@ -507,3 +511,11 @@ Functionalities which are not supported yet:
 
 PRs are welcome!
 x Tummetott
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[neovim-shield]: https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white
+[neovim-url]: https://neovim.io/
+[lua-shield]: https://img.shields.io/badge/lua-%232C2D72.svg?style=for-the-badge&logo=lua&logoColor=white
+[lua-url]: https://www.lua.org/
+[luarocks-shield]: https://img.shields.io/luarocks/v/tummetott/unimpaired.nvim?logo=lua&color=purple
+[luarocks-url]: https://luarocks.org/modules/tummetott/unimpaired.nvim

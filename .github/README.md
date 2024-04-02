@@ -32,16 +32,15 @@ come in complementary pairs which mostly fall into four categories:
 
 Install the plugin with your favourite package manager.
 
-Example using [packer](https://github.com/wbthomason/packer.nvim):
+Example using [lazy](https://github.com/folke/lazy.nvim):
 
 ```lua
 use {
     'tummetott/unimpaired.nvim',
-    config = function()
-        require('unimpaired').setup {
-            -- add any options here or leave empty
-        }
-    end
+    event = 'VeryLazy',
+    opts = {
+        -- add options here if you wish to override the default settings
+    },
 }
 ```
 

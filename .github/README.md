@@ -35,7 +35,7 @@ Install the plugin with your favourite package manager.
 Example using [lazy](https://github.com/folke/lazy.nvim):
 
 ```lua
-use {
+{
     'tummetott/unimpaired.nvim',
     event = 'VeryLazy',
     opts = {

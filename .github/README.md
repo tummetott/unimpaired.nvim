@@ -1,7 +1,5 @@
 # unimpaired.nvim
 
-[![Neovim][neovim-shield]][neovim-url]
-[![Lua][lua-shield]][lua-url]
 [![LuaRocks][luarocks-shield]][luarocks-url]
 
 ### :pencil: Description:

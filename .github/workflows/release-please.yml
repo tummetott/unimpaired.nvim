@@ -20,4 +20,4 @@ jobs:
         with:
           release-type: simple
           package-name: unimpaired.nvim
-          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          token: ${{ secrets.PAT }}

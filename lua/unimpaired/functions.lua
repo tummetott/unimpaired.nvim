@@ -186,11 +186,15 @@ M.next_file = function()
 end
 
 M.blank_above = function()
-    vim.cmd("put! =repeat(nr2char(10), v:count1)|silent ']+")
+    local repeated = vim.fn["repeat"]({""}, vim.v.count1)
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    vim.api.nvim_buf_set_lines(0, line-1, line-1, true, repeated)
 end
 
 M.blank_below = function()
-    vim.cmd("put =repeat(nr2char(10), v:count1)|silent '[-")
+    local repeated = vim.fn["repeat"]({""}, vim.v.count1)
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    vim.api.nvim_buf_set_lines(0, line, line, true, repeated)
 end
 
 M.exchange_above = function()

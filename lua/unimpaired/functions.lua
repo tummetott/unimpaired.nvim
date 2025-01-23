@@ -141,14 +141,20 @@ local file_by_offset = function(offset)
     if not files then return end
     local current = vim.fn.expand('%:t')
     if current == '' then
-        if offset < 0 then return dir .. '/' .. files[1]
-        else return dir .. '/' .. files[#files] end
+        if offset < 0 then
+            return dir .. '/' .. files[1]
+        else
+            return dir .. '/' .. files[#files]
+        end
     else
         local index = vim.fn.index(files, current) + 1
         if index == 0 then return end
         index = index + offset
-        if index < 1 then index = 1
-        elseif index > #files then index = #files end
+        if index < 1 then
+            index = 1
+        elseif index > #files then
+            index = #files
+        end
         return dir .. '/' .. files[index]
     end
 end
@@ -176,7 +182,7 @@ M.next_file = function()
     if wininfo.loclist == 1 then
         vim.cmd('silent! lnewer ' .. vim.v.count1)
     elseif wininfo.quickfix == 1 or ft == 'Trouble' then
-        vim.cmd('silent! cnewer ' .. vim.v.count1 )
+        vim.cmd('silent! cnewer ' .. vim.v.count1)
     else
         local file = file_by_offset(vim.v.count1)
         if file then
@@ -186,13 +192,13 @@ M.next_file = function()
 end
 
 M.blank_above = function()
-    local repeated = vim.fn["repeat"]({""}, vim.v.count1)
+    local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
     local line = vim.api.nvim_win_get_cursor(0)[1]
-    vim.api.nvim_buf_set_lines(0, line-1, line-1, true, repeated)
+    vim.api.nvim_buf_set_lines(0, line - 1, line - 1, true, repeated)
 end
 
 M.blank_below = function()
-    local repeated = vim.fn["repeat"]({""}, vim.v.count1)
+    local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
     local line = vim.api.nvim_win_get_cursor(0)[1]
     vim.api.nvim_buf_set_lines(0, line, line, true, repeated)
 end
@@ -234,26 +240,38 @@ M.disable_background = function()
 end
 
 M.toggle_background = function()
-    if vim.o.background == 'dark' then M.enable_background()
-    else M.disable_background() end
+    if vim.o.background == 'dark' then
+        M.enable_background()
+    else
+        M.disable_background()
+    end
 end
 
 M.enable_cursorline = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.set_cursorline(true)
-    else vim.o.cursorline = true end
+    if loaded then
+        reticle.set_cursorline(true)
+    else
+        vim.o.cursorline = true
+    end
 end
 
 M.disable_cursorline = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.set_cursorline(false)
-    else vim.o.cursorline = false end
+    if loaded then
+        reticle.set_cursorline(false)
+    else
+        vim.o.cursorline = false
+    end
 end
 
 M.toggle_cursorline = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.toggle_cursorline()
-    else vim.o.cursorline = not vim.o.cursorline end
+    if loaded then
+        reticle.toggle_cursorline()
+    else
+        vim.o.cursorline = not vim.o.cursorline
+    end
 end
 
 M.enable_diff = function() vim.cmd('diffthis') end
@@ -261,8 +279,11 @@ M.enable_diff = function() vim.cmd('diffthis') end
 M.disable_diff = function() vim.cmd('diffoff') end
 
 M.toggle_diff = function()
-    if vim.o.diff then M.disable_diff()
-    else M.enable_diff() end
+    if vim.o.diff then
+        M.disable_diff()
+    else
+        M.enable_diff()
+    end
 end
 
 M.enable_hlsearch = function() vim.o.hlsearch = true end
@@ -306,26 +327,38 @@ M.enable_colorcolumn = function() vim.o.colorcolumn = '+1' end
 M.disable_colorcolumn = function() vim.o.colorcolumn = '' end
 
 M.toggle_colorcolumn = function()
-    if vim.o.colorcolumn == '' then M.enable_colorcolumn()
-    else M.disable_colorcolumn() end
+    if vim.o.colorcolumn == '' then
+        M.enable_colorcolumn()
+    else
+        M.disable_colorcolumn()
+    end
 end
 
 M.enable_cursorcolumn = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.set_cursorcolumn(true)
-    else vim.o.cursorcolumn = true end
+    if loaded then
+        reticle.set_cursorcolumn(true)
+    else
+        vim.o.cursorcolumn = true
+    end
 end
 
 M.disable_cursorcolumn = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.set_cursorcolumn(false)
-    else vim.o.cursorcolumn = false end
+    if loaded then
+        reticle.set_cursorcolumn(false)
+    else
+        vim.o.cursorcolumn = false
+    end
 end
 
 M.toggle_cursorcolumn = function()
     local loaded, reticle = pcall(require, 'reticle')
-    if loaded then reticle.toggle_cursorcolumn()
-    else vim.o.cursorcolumn = not vim.o.cursorcolumn end
+    if loaded then
+        reticle.toggle_cursorcolumn()
+    else
+        vim.o.cursorcolumn = not vim.o.cursorcolumn
+    end
 end
 
 M.enable_virtualedit = function() vim.o.virtualedit = 'all' end
@@ -333,8 +366,25 @@ M.enable_virtualedit = function() vim.o.virtualedit = 'all' end
 M.disable_virtualedit = function() vim.o.virtualedit = '' end
 
 M.toggle_virtualedit = function()
-    if vim.o.virtualedit == '' then M.enable_virtualedit()
-    else M.disable_virtualedit() end
+    if vim.o.virtualedit == '' then
+        M.enable_virtualedit()
+    else
+        M.disable_virtualedit()
+    end
+end
+
+M.enable_virtual_text = function()
+    vim.diagnostic.config({ virtual_text = true })
+end
+
+M.disable_virtual_text = function()
+    vim.diagnostic.config({ virtual_text = false })
+end
+
+M.toggle_virtual_text = function()
+    vim.diagnostic.config({
+        virtual_text = not vim.diagnostic.config().virtual_text,
+    })
 end
 
 M.enable_wrap = function() vim.o.wrap = true end

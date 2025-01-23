@@ -28,8 +28,7 @@ M.register = function()
                 end
                 vim.keymap.set(mode, map, callback, opt)
             else
-                -- TODO: Error message
-                print('Invalid entry in config')
+                print('Unimpaired.nvim: "' .. target .. '" is not a valid keymap')
                 return
             end
         end

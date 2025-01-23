@@ -353,6 +353,21 @@ local defaults = {
             description = 'Toggle virtualedit',
             dot_repeat = false,
         },
+        enable_virtual_text = {
+            mapping = '[oy',
+            description = 'Enable virtual text',
+            dot_repeat = false,
+        },
+        disable_virtual_text = {
+            mapping = ']oy',
+            description = 'Disable virtual text',
+            dot_repeat = false,
+        },
+        toggle_virtual_text = {
+            mapping = 'yoy',
+            description = 'Toggle virtual text',
+            dot_repeat = false,
+        },
         enable_wrap = {
             mapping = '[ow',
             description = 'Enable line wrapping',

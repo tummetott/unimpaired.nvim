@@ -89,11 +89,7 @@ require('unimpaired').setup {
 ##### Default Configuration
 To see all keys of the `keymaps` table, have a look at the default setup options of `unimpaired.nvim`:
 
-<details><summary>Default Configuration</summary>
-
-https://github.com/tummetott/unimpaired.nvim/blob/8e504ba95dd10a687f4e4dacd5e19db221b88534/lua/unimpaired/config.lua
-
-</details>
+[Default Configuration](https://github.com/tummetott/unimpaired.nvim/blob/8e504ba95dd10a687f4e4dacd5e19db221b88534/lua/unimpaired/config.lua)
 
 ### Caveats:
 

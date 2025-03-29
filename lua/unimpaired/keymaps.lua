@@ -11,14 +11,18 @@ M.register = function()
             local mode = 'n'
             if vim.startswith(target, 'exchange_section_') then
                 mode = 'x'
+            elseif vim.endswith(target, '_motion') then
+                mode = 'o'
             end
             local map = value.mapping or value
             local callback
             local opt = {}
             opt.desc = value.description
-            opt.expr = value.dot_repeat
+            opt.expr = mode ~= 'o' and value.dot_repeat or false
             if functions[target] then
-                if value.dot_repeat then
+                -- in o-mode dot-repeatable is set by the operator
+                -- e.g. in `d]n`, the `d` operation determines dot-repeatable
+                if value.dot_repeat and mode ~= 'o' then
                     callback = function()
                         vim.go.operatorfunc = call_path .. target
                         return 'g@l'

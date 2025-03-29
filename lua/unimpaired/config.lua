@@ -173,6 +173,28 @@ local defaults = {
             description = 'Move section [count] lines down',
             dot_repeat = true,
         },
+        previous_scm_marker = {
+            mapping = '[n',
+            description = 'Go to the previous SCM conflict marker or diff/patch hunk.',
+            dot_repeat = true,
+        },
+        next_scm_marker = {
+            mapping = ']n',
+            description = 'Go to the next SCM conflict marker or diff/patch hunk.',
+            dot_repeat = true,
+        },
+        previous_scm_marker_motion = {
+            mapping = '[n',
+            description = 'Operate on the previous SCM conflict marker or diff/patch hunk. Try d[n inside a conflict.',
+            -- since this is used as a motion, it is dot-repeatable by default
+            dot_repeat = true,
+        },
+        next_scm_marker_motion = {
+            mapping = ']n',
+            description = 'Operate on the next SCM conflict marker or diff/patch hunk. Try d]n inside a conflict.',
+            -- since this is used as a motion, it is dot-repeatable by default
+            dot_repeat = true,
+        },
         enable_cursorline = {
             mapping = '[oc',
             description = 'Enable cursorline',

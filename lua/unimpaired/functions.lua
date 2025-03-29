@@ -231,6 +231,62 @@ M.exchange_section_below = function()
     restore_dot_repetition(count)
 end
 
+local context = function (reverse)
+    local flags = reverse == 1 and "bW" or "W"
+    vim.fn.search('^\\(@@ .* @@\\|[<=>|]\\{7}[<=>|]\\@!\\)', flags)
+end
+
+local context_motion = function (reverse)
+    if reverse == 1 then
+        vim.cmd('-')
+    end
+
+    vim.fn.search('^@@ .* @@\\|^diff \\|^[<=>|]\\{7}[<=>|]\\@!', 'bWc')
+
+    local end_line
+    if vim.fn.match(vim.fn.getline('.'),  '^diff ') >= 0 then
+        end_line = vim.fn.search('^diff ', 'Wn') - 1
+        if end_line < 0 then
+            end_line = vim.fn.line('$')
+        end
+    elseif vim.fn.match(vim.fn.getline('.'), '^@@ ') >= 0  then
+        end_line = vim.fn.search('^@@ .* @@\\|^diff ', 'Wn') - 1
+        if end_line < 0 then
+            end_line = vim.fn.line('$')
+        end
+    elseif vim.fn.match(vim.fn.getline('.'), '^=\\{7\\}') >= 0  then
+        vim.cmd('+')
+        end_line = vim.fn.search('^>\\{7}>\\@!', 'Wnc')
+    elseif vim.fn.match(vim.fn.getline('.'), '^[<=>|]\\{7\\}') >= 0  then
+        end_line = vim.fn.search('^[<=>|]\\{7}[<=>|]\\@!', 'Wn') - 1
+    else
+        return
+    end
+
+    if end_line > vim.fn.line('.') then
+        vim.fn.execute('normal! V' .. (end_line - vim.fn.line('.')) .. 'j')
+    elseif end_line == vim.fn.line('.') then
+        vim.fn.execute('normal! V')
+    end
+
+end
+
+M.previous_scm_marker_motion = function ()
+    context_motion(1)
+end
+
+M.next_scm_marker_motion = function ()
+    context_motion(0)
+end
+
+M.previous_scm_marker = function ()
+    context(1)
+end
+
+M.next_scm_marker = function ()
+    context(0)
+end
+
 M.enable_background = function()
     vim.o.background = 'light'
 end

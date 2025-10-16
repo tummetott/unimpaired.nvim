@@ -89,7 +89,7 @@ require('unimpaired').setup {
 ##### Default Configuration
 To see all keys of the `keymaps` table, have a look at the default setup options of `unimpaired.nvim`:
 
-[Default Configuration](https://github.com/tummetott/unimpaired.nvim/blob/8e504ba95dd10a687f4e4dacd5e19db221b88534/lua/unimpaired/config.lua)
+[Default Configuration](https://github.com/tummetott/unimpaired.nvim/blob/main/lua/unimpaired/config.lua)
 
 ### Caveats:
 
@@ -97,8 +97,6 @@ This plugin is work in progress. You may experience bugs and changes of the API.
 
 Functionalities which are not supported yet:
 
-- Go to the previous SCM conflict marker or diff/patch hunk
-- Go to the next SCM conflict marker or diff/patch hunk
 - Paste after linewise, increasing indent
 - Paste before linewise, increasing indent
 - Paste after linewise, decreasing indent

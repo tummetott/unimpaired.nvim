@@ -170,7 +170,7 @@ M.previous_file = function()
     else
         local file = file_by_offset(-vim.v.count1)
         if file then
-            vim.cmd('edit ' .. file)
+            vim.cmd('edit ' .. vim.fn.fnameescape(file))
         end
     end
 end
@@ -186,7 +186,7 @@ M.next_file = function()
     else
         local file = file_by_offset(vim.v.count1)
         if file then
-            vim.cmd('edit ' .. file)
+            vim.cmd('edit ' .. vim.fn.fnameescape(file))
         end
     end
 end

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/tummetott/unimpaired.nvim/compare/v0.4.0...v0.4.1) (2026-03-15)
+
+
+### Bug Fixes
+
+* escape file paths with special characters in ]f/[f keymaps ([#16](https://github.com/tummetott/unimpaired.nvim/issues/16)) ([bfa0eb0](https://github.com/tummetott/unimpaired.nvim/commit/bfa0eb0431fd8510aac656fec446409f0d5ad7f2))
+
 ## [0.4.0](https://github.com/tummetott/unimpaired.nvim/compare/v0.3.0...v0.4.0) (2025-03-29)
 
 
